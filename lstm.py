@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import time
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
@@ -65,6 +66,8 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 # 6. Train the model
 EPOCHS = 50
 for epoch in range(EPOCHS):
+    start_time = time.time()
+    
     model.train()
     optimizer.zero_grad()
     output = model(X_train)
@@ -72,8 +75,11 @@ for epoch in range(EPOCHS):
     loss.backward()
     optimizer.step()
     
-    if (epoch+1) % 10 == 0:
-        print(f"Epoch {epoch+1}/{EPOCHS}, Loss: {loss.item():.4f}")
+    end_time = time.time()
+    epoch_time = end_time - start_time
+    
+    if (epoch+1) % 10 == 0 or epoch == 0:
+        print(f"Epoch {epoch+1}/{EPOCHS}, Loss: {loss.item():.4f}, Time: {epoch_time:.2f} sec")
 
 # 7. Evaluate on test data
 model.eval()
