@@ -5,7 +5,7 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 from sklearn.metrics import mean_squared_error
 
 # Load the CSV
-df = pd.read_csv("Sunspots.csv", parse_dates=['Date'], index_col='Date')
+df = pd.read_csv("sunspots.csv", parse_dates=['Date'], index_col='Date')
 df.rename(columns={'Monthly Mean Total Sunspot Number': 'Sunspots'}, inplace=True)
 
 # Train/test split
